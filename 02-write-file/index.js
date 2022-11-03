@@ -13,7 +13,7 @@ fs.writeFile(
 const { stdin, stdout, stderr } = process;
 stdout.write('Пожалуйста введите любой текст \n');
 stdin.on('data', data => {
-  if (data.toString() == '.exit\r\n') {
+  if (data.toString() == 'exit\r\n') {
     stdout.write('Bye-bye');
     process.exit();
   }//обрабатывает выход через .exit+enter
