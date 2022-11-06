@@ -5,13 +5,13 @@ const { copyFile, readdir, stat } = require('node:fs/promises');
 async function addFolder(pathName) {
   await fs.promises.mkdir(pathName, { recursive: true });//,
   // (err) => console.error(err));
-  console.log('Папка была создана');
+  // console.log('Папка была создана');
 }
 
 async function deleteFolder(pathName) {
   await fs.promises.rm(pathName, { recursive: true, force: true, maxRetries: 100 });//,
   // (err) => console.error('err', err));
-  console.log('Папка успешно удалена');
+  // console.log('Папка успешно удалена');
 }
 
 function createStylesFile() {
@@ -37,16 +37,16 @@ function createHTMLFile() {
 async function hasCopyDir(pathName, folderName) {
   try {
     const folders = await readdir(pathName);
-    console.log('folders', folders);
+    // console.log('folders', folders);
     if (folders.includes(`${folderName}`)) {
-      console.log(`${folderName} существует - удаляем - проверяем заново`);
-      const insideFolder = await readdir(path.join(__dirname, `${folderName}`));
-      console.log('inside', insideFolder);
+      // console.log(`${folderName} существует - удаляем - проверяем заново`);
+      // const insideFolder = await readdir(path.join(__dirname, `${folderName}`));
+      // console.log('inside', insideFolder);
         await deleteFolder(path.join(__dirname, `${folderName}`));
         hasCopyDir(pathName, folderName);
     } else {
-      console.log(`${folderName} не существует - создаем`);
-      console.log(path.join(__dirname, `${folderName}`));
+      // console.log(`${folderName} не существует - создаем`);
+      // console.log(path.join(__dirname, `${folderName}`));
       addFolder(path.join(__dirname, `${folderName}`));
       createHTMLFile();
       getComponents();
@@ -129,13 +129,14 @@ async function getComponents() {
               `${HTMLcode}`,
               err => {
                 if (err) throw err;
-                // console.log('Файл был изменен');
+                // console.log('Файл HTML был изменен');
               }
             );
         }
       });
       }
   });
+  console.log('Файл HTML был изменен');
 }
 
 hasCopyDir(path.dirname(__filename), 'project-dist');
