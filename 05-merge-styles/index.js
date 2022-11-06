@@ -23,7 +23,7 @@ async function mergeStyles() {
       readableStream.on('data', data => {
         fs.appendFile(
           path.join(__dirname, 'project-dist', 'bundle.css'),
-          `${data}`,
+          `${data}\n`,
           err => {
             if (err) throw err;
           }
